@@ -2,6 +2,8 @@ package biblioteka;
 
 import java.util.LinkedList;
 
+
+
 import biblioteka.interfejs.BibliotekaInterfejs;
 
 public class Biblioteka implements BibliotekaInterfejs {
@@ -9,13 +11,17 @@ public class Biblioteka implements BibliotekaInterfejs {
 	private LinkedList<Knjiga> knjige = new LinkedList<Knjiga>();
 
 	public void dodajKnjigu(Knjiga knjiga) {
-
+		if(knjiga==null || knjige.contains(knjiga)){
+			throw new RuntimeException("Greska pri unosu knjige");
+		}
 		knjige.add(knjiga);
 
 	}
 
 	public void obrisiKnjigu(Knjiga knjiga) {
-
+		if(knjiga==null || !knjige.contains(knjiga)){
+			throw new RuntimeException("Greska pri unosu knjige");
+		}
 		knjige.remove(knjiga);
 
 	}
@@ -27,8 +33,11 @@ public class Biblioteka implements BibliotekaInterfejs {
 	}
 
 	public LinkedList<Knjiga> pronadjiKnjigu(Autor autor, long isbn, String naslov, String izdavac) {
+
+		
 		if(naslov==null || naslov.isEmpty()){
-			return knjige;
+			throw new RuntimeException("Naslov je prazan!");
+
 		}
 		
 		LinkedList<Knjiga> rezultat = new LinkedList<Knjiga>();
